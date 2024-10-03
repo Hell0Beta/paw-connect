@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawConnect | Modern Pet Finder</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="#" class="logo" onclick="showPage('home')">🐾 PawConnect</a>
+            <div class="nav-links">
+                <a href="#" onclick="showPage('home')">Home</a>
+                <a href="#" onclick="showPage('login')">Login</a>
+                <a href="#" onclick="showPage('register')">Register Pet</a>
+                <a href="#" onclick="showPage('lost')">Lost Pets</a>
+                <a href="#" onclick="showPage('report')">Report</a>
+                <a href="#" onclick="showPage('user-homepage')">User Homepage</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="pages">
+        <!-- Home Page -->
+        <div id="home" class="active">
+
+            <section class="hero">
+                <div class="container">
+                    <h1>Reunite Lost Pets with Their Families</h1>
+                    <p style="color: var(--light-text); margin-bottom: 2rem;">Fast, reliable pet recovery service powered by community</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn" onclick="showPage('report')">Report Found Pet</a>
+                        <a href="#" class="btn btn-outline" onclick="showPage('lost')">Search Lost Pets</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container">
+                <div class="dog-card">
+                    <div class="dog-image"><img src="d:\DOWNLOADS\ImGs\_08c39c20-e9fc-45da-82a4-9c190bbad32f.png" alt="Your Mutt"></div>
+                    <div class="dog-info">
+                        <h3>Golden Retriever</h3>
+                        <p><strong>Name:</strong> Max</p>
+                        <p><strong>Lost:</strong> Central Park</p>
+                        <p><strong>Date:</strong> Oct 1, 2024</p>
+                        <p><strong>Status:</strong> At shelter</p>
+                        <a href="#" class="btn" style="margin-top: 1rem;">Contact Finder</a>
+                    </div>
+                    <div id="map">
+
+                    </div>
+                    <div id="coordinates">
+                        Latitude: <span id="lat"></span>, Longitude: <span id="lon"></span>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="container">
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-qrcode"></i>
+                        <h2>Quick Registration</h2>
+                        <p>Register your pet with our digital ID system for fast identification</p>
+                    </div>
+                    <!-- <div class="feature">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h2>Location Tracking</h2>
+                        <p>Real-time updates on found pets in your area</p>
+                    </div> -->
+                    <div class="feature">
+                        <i class="fas fa-users"></i>
+                        <h2>Community Network</h2>
+                        <p>Connect with local pet lovers to expand your search</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login">
+            <div class="container">
+                <div class="card">
+                    <h2>Welcome Back</h2>
+                    <p style="color: var(--light-text); margin-bottom: 1.5rem;">Sign in to your account</p>
+                    <form onsubmit="return false;">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" required>
+                        </div>
+                        <button class="btn" style="width: 100%;">Sign In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Pet Page -->
+        <div id="register">
+            <div class="container">
+                <div class="card">
+                    <h2>Register Your Pet</h2>
+                    <form onsubmit="return false;">
+                        <div class="form-group">
+                            <label for="petName">Pet's Name</label>
+                            <input type="text" id="petName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="breed">Breed</label>
+                            <input type="text" id="breed" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" rows="3"></textarea>
+                        </div>
+                        <button class="btn" style="width: 100%;">Register Pet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lost Pets Page -->
+        <div id="lost">
+            <div class="container">
+                <h2 style="text-align: center;">Lost Pets</h2>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Search by breed, location, etc...">
+                    <button class="btn">Search</button>
+                </div>
+                <div class="dog-grid">
+                    <div class="dog-card">
+                        <div class="dog-image"></div>
+                        <div class="dog-info">
+                            <h3>Golden Retriever</h3>
+                            <p><strong>Name:</strong> Max</p>
+                            <p><strong>Lost:</strong> Central Park</p>
+                            <p><strong>Date:</strong> Oct 1, 2024</p>
+                            <p><strong>Status:</strong> At shelter</p>
+                            <a href="#" class="btn" style="margin-top: 1rem;">Contact Finder</a>
+                        </div>
+                    </div>
+                    <div class="dog-card">
+                        <div class="dog-image"></div>
+                        <div class="dog-info">
+                            <h3>Labrador</h3>
+                            <p><strong>Name:</strong> Unknown</p>
+                            <p><strong>Lost:</strong> Main Street</p>
+                            <p><strong>Date:</strong> Sept 30, 2024</p>
+                            <p><strong>Status:</strong> With finder</p>
+                            <a href="#" class="btn" style="margin-top: 1rem;">Contact Finder</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Pet Page -->
+        <div id="report">
+            <div class="container">
+                <div class="card">
+                    <h2>Report a Pet</h2>
+                    <form onsubmit="return false;">
+                        <div class="form-group">
+                            <label for="reportType">Report Type</label>
+                            <select id="reportType" required>
+                                <option value="lost">Lost Pet</option>
+                                <option value="found">Found Pet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reportBreed">Breed</label>
+                            <input type="text" id="reportBreed" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactInfo">Contact Information</label>
+                            <input type="tel" id="contactInfo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="additionalInfo">Additional Information</label>
+                            <textarea id="additionalInfo" rows="3"></textarea>
+                        </div>
+                        <button class="btn" style="width: 100%;">Submit Report</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 PawConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        
+        function showPage(pageId) {
+            document.querySelectorAll('#pages > div').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Website Loaded Successfully');
+        });
+
+
+        var map = L.map('map').setView([0, 0], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap & Paw Connect 🐶</a> contributors'
+        }).addTo(map);
+
+        var marker;
+
+        function updatePosition(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            
+            document.getElementById('lat').textContent = lat.toFixed(3);
+            document.getElementById('lon').textContent = lon.toFixed(3);
+
+            if (marker) {
+                marker.setLatLng([lat, lon]);
+            } else {
+                marker = L.marker([lat, lon]).addTo(map);
+            }
+
+            map.setView([lat, lon], 13);
+        }
+
+        //  Error handing for failed location request
+        function handleError(error) {
+            console.error("Error getting location:", error.message);
+        }
+
+        // 
+        if ("geolocation" in navigator) {
+            navigator.geolocation.watchPosition(updatePosition, handleError);
+        } else {
+            alert("Geolocation is not supported by your browser");
+        }
+    </script>
+</body>
+</html>
+            
